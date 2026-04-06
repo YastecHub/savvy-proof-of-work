@@ -77,7 +77,7 @@ export default function HeroSection() {
         variants={stagger}
         initial="hidden"
         animate="visible"
-        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-5 sm:gap-6 py-20 sm:py-24"
+        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-5 sm:gap-6 py-20 sm:py-24 opacity-100"
       >
         {/* Badge */}
         <motion.div variants={fadeUp}>

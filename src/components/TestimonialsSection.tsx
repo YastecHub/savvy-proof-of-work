@@ -85,7 +85,7 @@ const platformColor: Record<string, string> = {
 /* ── Card component ─────────────────────────────────────────── */
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <div className="group relative w-[280px] sm:w-[320px] shrink-0 mx-2 sm:mx-3 rounded-xl border border-border bg-surface/60 p-5 transition-all duration-300 hover:border-jade/15 hover:bg-elevated/40 select-none">
+    <div className="group relative w-[280px] sm:w-[320px] shrink-0 mx-2 sm:mx-3 rounded-xl border border-line bg-surface/60 p-5 transition-all duration-300 hover:border-jade/15 hover:bg-elevated/40 select-none">
       {/* Quote */}
       <div className="mb-4">
         <span className="absolute -top-1 left-4 font-display text-3xl text-jade/10 leading-none select-none">
@@ -108,7 +108,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
       </div>
 
       {/* Divider */}
-      <div className="h-px w-full bg-border mb-3" />
+      <div className="h-px w-full bg-line mb-3" />
 
       {/* Author */}
       <div className="flex items-center gap-2.5">

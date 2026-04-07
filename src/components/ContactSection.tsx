@@ -40,15 +40,32 @@ const socials = [
 /* ── Section ────────────────────────────────────────────────── */
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setSubmitted(false);
-      (e.target as HTMLFormElement).reset();
-    }, 3000);
+    setSending(true);
+
+    const form = e.target as HTMLFormElement;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("https://formspree.io/f/xldrpvje", {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        form.reset();
+        setTimeout(() => setSubmitted(false), 4000);
+      }
+    } catch {
+      // silent fail — form stays open for retry
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -79,7 +96,7 @@ export default function ContactSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="rounded-2xl border border-border bg-surface/40 p-6 sm:p-8"
+          className="rounded-2xl border border-line bg-surface/40 p-6 sm:p-8"
         >
           {submitted ? (
             <motion.div
@@ -96,12 +113,9 @@ export default function ContactSection() {
               </p>
             </motion.div>
           ) : (
-            <form 
+            <form
               onSubmit={handleSubmit}
-              action="https://formspree.io/f/xldrpvje" 
-              method="POST"
               className="flex flex-col gap-7"
-              suppressHydrationWarning
             >
               {/* Name */}
               <motion.div variants={fadeUp} className="relative group">
@@ -117,7 +131,7 @@ export default function ContactSection() {
                   type="text"
                   required
                   placeholder="ser anon"
-                  className="w-full bg-transparent border-b border-border pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
+                  className="w-full bg-transparent border-b border-line pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
                   suppressHydrationWarning
                 />
               </motion.div>
@@ -136,7 +150,7 @@ export default function ContactSection() {
                   type="text"
                   required
                   placeholder="@yourhandle"
-                  className="w-full bg-transparent border-b border-border pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
+                  className="w-full bg-transparent border-b border-line pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
                   suppressHydrationWarning
                 />
               </motion.div>
@@ -155,7 +169,7 @@ export default function ContactSection() {
                   required
                   rows={4}
                   placeholder="What brings you to the court?"
-                  className="w-full bg-transparent border-b border-border pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none resize-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
+                  className="w-full bg-transparent border-b border-line pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none resize-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
                   suppressHydrationWarning
                 />
               </motion.div>
@@ -164,10 +178,11 @@ export default function ContactSection() {
               <motion.div variants={fadeUp}>
                 <button
                   type="submit"
-                  className="group w-full flex items-center justify-center gap-2 py-3.5 bg-jade/10 border border-jade/25 text-jade font-mono text-xs uppercase tracking-wider rounded-lg transition-all duration-300 hover:bg-jade/15 hover:border-jade/40 hover:shadow-jade"
+                  disabled={sending}
+                  className="group w-full flex items-center justify-center gap-2 py-3.5 bg-jade/10 border border-jade/25 text-jade font-mono text-xs uppercase tracking-wider rounded-lg transition-all duration-300 hover:bg-jade/15 hover:border-jade/40 hover:shadow-jade disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send size={14} />
-                  Send Message
+                  {sending ? "Sending..." : "Send Message"}
                 </button>
               </motion.div>
             </form>
@@ -189,7 +204,7 @@ export default function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.label}
-              className="w-10 h-10 rounded-full border border-border bg-surface/60 flex items-center justify-center text-t-muted hover:text-jade hover:border-jade/30 hover:shadow-jade transition-all duration-300"
+              className="w-10 h-10 rounded-full border border-line bg-surface/60 flex items-center justify-center text-t-muted hover:text-jade hover:border-jade/30 hover:shadow-jade transition-all duration-300"
             >
               {s.icon}
             </a>

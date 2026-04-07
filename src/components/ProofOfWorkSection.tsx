@@ -136,7 +136,7 @@ export default function ProofOfWorkSection() {
                   whileInView="visible"
                   exit="exit"
                   viewport={{ once: true, margin: "-40px" }}
-                  className={`group relative flex flex-col justify-between p-5 rounded-xl border border-border bg-surface/60 border-l-[3px] ${style.border} hover:bg-elevated/50 hover:border-jade/15 transition-all duration-300 hover:-translate-y-1 overflow-hidden`}
+                  className={`group relative flex flex-col justify-between p-5 rounded-xl border border-line bg-surface/60 border-l-[3px] ${style.border} hover:bg-elevated/50 hover:border-jade/15 transition-all duration-300 hover:-translate-y-1 overflow-hidden`}
                 >
                   {/* Hover glow */}
                   <div className="pointer-events-none absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(ellipse_at_top_left,_rgba(26,61,40,0.08)_0%,_transparent_70%)]" />
@@ -164,12 +164,12 @@ export default function ProofOfWorkSection() {
                   </div>
 
                   {/* Bottom: result + chain */}
-                  <div className="relative z-10 flex items-end justify-between gap-3 pt-3 border-t border-border">
+                  <div className="relative z-10 flex items-end justify-between gap-3 pt-3 border-t border-line">
                     <span className="font-mono text-lg sm:text-xl font-bold text-jade">
                       {card.result}
                     </span>
                     {card.chain && (
-                      <span className="font-mono text-[9px] uppercase tracking-wider text-t-muted px-2 py-0.5 rounded border border-border bg-elevated/40">
+                      <span className="font-mono text-[9px] uppercase tracking-wider text-t-muted px-2 py-0.5 rounded border border-line bg-elevated/40">
                         {card.chain}
                       </span>
                     )}
@@ -191,7 +191,7 @@ export default function ProofOfWorkSection() {
             <button
               type="button"
               onClick={() => setShowAll(true)}
-              className="group flex items-center gap-2 px-8 py-3 font-mono text-xs uppercase tracking-wider text-t-muted border border-border rounded-lg hover:border-jade/25 hover:text-jade transition-all duration-300"
+              className="group flex items-center gap-2 px-8 py-3 font-mono text-xs uppercase tracking-wider text-t-muted border border-line rounded-lg hover:border-jade/25 hover:text-jade transition-all duration-300"
             >
               Load More
               <ChevronDown size={14} className="group-hover:translate-y-0.5 transition-transform" />

@@ -105,13 +105,13 @@ export default function MasterySection() {
               <motion.div
                 key={m.title}
                 variants={fadeUp}
-                className="group relative p-5 sm:p-6 rounded-xl border border-border bg-surface/40 hover:border-jade/15 hover:bg-elevated/40 transition-all duration-300 hover:-translate-y-1"
+                className="group relative p-5 sm:p-6 rounded-xl border border-line bg-surface/40 hover:border-jade/15 hover:bg-elevated/40 transition-all duration-300 hover:-translate-y-1"
               >
                 {/* Jade left ledger line */}
                 <div className="absolute left-0 top-4 bottom-4 w-[2px] rounded-full bg-jade/15 group-hover:bg-jade/40 transition-colors duration-300" />
 
                 {/* Icon */}
-                <div className="w-9 h-9 rounded-lg border border-border bg-elevated/60 flex items-center justify-center mb-4 group-hover:border-jade/25 transition-colors">
+                <div className="w-9 h-9 rounded-lg border border-line bg-elevated/60 flex items-center justify-center mb-4 group-hover:border-jade/25 transition-colors">
                   <Icon size={16} className="text-jade/60 group-hover:text-jade transition-colors" />
                 </div>
 

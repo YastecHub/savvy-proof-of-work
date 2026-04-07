@@ -5,7 +5,7 @@ import { Crown } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-border">
+    <footer className="relative border-t border-line">
       {/* Top gradient glow line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-jade/15 to-transparent" />
 

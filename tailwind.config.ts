@@ -17,7 +17,7 @@ const config: Config = {
         gold: "var(--accent-gold)",
         "t-primary": "var(--text-primary)",
         "t-muted": "var(--text-muted)",
-        border: "var(--border)",
+        line: "var(--border)",
       },
       fontFamily: {
         display: ["var(--font-cinzel)", "serif"],

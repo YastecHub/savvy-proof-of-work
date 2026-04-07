@@ -9,15 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        base: "var(--bg-base)",
-        surface: "var(--bg-surface)",
-        elevated: "var(--bg-elevated)",
-        jade: "var(--accent-primary)",
-        "jade-glow": "var(--accent-glow)",
-        gold: "var(--accent-gold)",
-        "t-primary": "var(--text-primary)",
-        "t-muted": "var(--text-muted)",
-        line: "var(--border)",
+        base: "#050507",
+        surface: "#0c0c0f",
+        elevated: "#111116",
+        jade: "#4ade6e",
+        "jade-glow": "#1a3d28",
+        gold: "#a07d3a",
+        "t-primary": "#e8e8ec",
+        "t-muted": "#5a5a6a",
+        line: "#1e1e28",
       },
       fontFamily: {
         display: ["var(--font-cinzel)", "serif"],

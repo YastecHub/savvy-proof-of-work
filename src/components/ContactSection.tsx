@@ -82,7 +82,7 @@ export default function ContactSection() {
                 Message Sent
               </h3>
               <p className="font-mono text-xs text-t-muted">
-                The King has received your scroll. Expect a raven.
+                IM_SAVVY has received your scroll. Expect a raven.
               </p>
             </motion.div>
           ) : (

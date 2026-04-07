@@ -78,15 +78,17 @@ export default function HeroSection() {
 
       {/* Content */}
       <motion.div
-        variants={stagger}
-        initial="hidden"
-        animate="visible"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
         className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-5 sm:gap-6 py-20 sm:py-24"
       >
         {/* Badge */}
-        <motion.div variants={fadeUp}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.6 }}
+        >
           <span className="inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 rounded-full border border-jade/15 bg-jade/5 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-jade/70">
             <span className="w-1.5 h-1.5 rounded-full bg-jade animate-pulse-jade" />
             Project operations and community architect
@@ -94,7 +96,11 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Hex avatar */}
-        <motion.div variants={scaleIn} className="relative mt-2">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.7 }}
+          className="relative mt-2">
           {/* Outer rotating dashed ring */}
           <div className="absolute inset-[-16px] rounded-full border border-dashed border-jade-glow/40 animate-rotate-slow" />
 
@@ -120,7 +126,9 @@ export default function HeroSection() {
 
         {/* Heading */}
         <motion.h1
-          variants={fadeUp}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
           className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-wide leading-none"
         >
           <span className="bg-gradient-to-r from-jade via-emerald-300 to-jade bg-clip-text text-transparent">
@@ -130,7 +138,9 @@ export default function HeroSection() {
 
         {/* Subheading block */}
         <motion.div
-          variants={fadeUp}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
           className="mt-8 w-full max-w-2xl"
         >
           {/* Title line */}
@@ -179,7 +189,9 @@ export default function HeroSection() {
 
         {/* Gradient line separator */}
         <motion.div
-          variants={fadeUp}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
           className="h-px w-2/5 mx-auto"
           style={{
             background: "linear-gradient(to right, transparent, #4ade6e, transparent)",
@@ -189,7 +201,9 @@ export default function HeroSection() {
 
         {/* CTAs */}
         <motion.div
-          variants={fadeUp}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
           className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto mt-3"
         >
           <a
@@ -210,7 +224,12 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Scroll indicator */}
-        <motion.div variants={fadeUp} className="mt-8 sm:mt-12">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
+          className="mt-8 sm:mt-12"
+        >
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" as const }}

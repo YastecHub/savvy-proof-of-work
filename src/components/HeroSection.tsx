@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowDown, Shield, ExternalLink } from "lucide-react";
@@ -21,8 +21,11 @@ const scaleIn = {
   visible: { scale: 1, opacity: 1, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
-/* ── Meteor component ───────────────────────────────────────── */
+/* ── Meteor component (client-only to avoid hydration mismatch) */
 function Meteors({ count = 12 }: { count?: number }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const meteors = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
@@ -32,11 +35,14 @@ function Meteors({ count = 12 }: { count?: number }) {
         duration: `${3 + Math.random() * 4}s`,
         size: Math.random() * 1.5 + 0.5,
       })),
-    [count]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [count, mounted]
   );
 
+  if (!mounted) return null;
+
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" suppressHydrationWarning>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {meteors.map((m) => (
         <div
           key={m.id}
@@ -47,12 +53,10 @@ function Meteors({ count = 12 }: { count?: number }) {
             animationDelay: m.delay,
             animationDuration: m.duration,
           }}
-          suppressHydrationWarning
         >
           <div
             className="rounded-full bg-jade/30"
             style={{ width: `${m.size}px`, height: `${m.size * 60}px` }}
-            suppressHydrationWarning
           />
         </div>
       ))}
@@ -76,7 +80,8 @@ export default function HeroSection() {
       <motion.div
         variants={stagger}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
         className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-5 sm:gap-6 py-20 sm:py-24 opacity-100"
       >
         {/* Badge */}
@@ -176,7 +181,7 @@ export default function HeroSection() {
           variants={fadeUp}
           className="h-px w-2/5 mx-auto"
           style={{
-            background: "linear-gradient(to right, transparent, var(--accent-primary), transparent)",
+            background: "linear-gradient(to right, transparent, #4ade6e, transparent)",
             margin: "32px 0",
           }}
         />

@@ -5,7 +5,11 @@
       "Bash(npm install:*)",
       "WebFetch(domain:imsavvy.vercel.app)",
       "Bash(npx next:*)",
-      "Bash(npm info:*)"
+      "Bash(npm info:*)",
+      "WebFetch(domain:tobzyy-pow.vercel.app)",
+      "WebFetch(domain:brittanychiang.com)",
+      "WebFetch(domain:leerob.io)",
+      "WebSearch"
     ]
   }
 }

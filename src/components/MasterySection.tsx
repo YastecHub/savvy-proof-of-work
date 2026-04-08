@@ -23,37 +23,37 @@ const masteries: Mastery[] = [
     icon: Zap,
     title: "Engagement Strategy",
     description:
-      "Architecting community engagement funnels that convert lurkers into active participants and holders into evangelists.",
+      "Engineering high retention systems that convert casual observers into committed, long term community members.",
   },
   {
     icon: ShieldAlert,
     title: "Chaos Management",
     description:
-      "FUD storms, exploit panics, migration dramas — keeping communities stable when everything is on fire.",
+      "Maintaining operational stability during high volatility events, rapid launches, and unexpected crisis scenarios.",
   },
   {
     icon: Megaphone,
     title: "Brand Voice",
     description:
-      "Crafting the tone, language, and narrative identity that makes a project instantly recognizable on the timeline.",
+      "Defining a sharp, authentic narrative that resonates across social layers, from professional tech specs to viral culture.",
   },
   {
     icon: Lightbulb,
     title: "Project Advisor",
     description:
-      "Tokenomics review, launch sequencing, partnership strategy, and governance design from pre-seed to mainnet.",
+      "Providing strategic guidance on roadmaps and market positioning to bridge the gap between concept and launch.",
   },
   {
     icon: TrendingUp,
     title: "Growth Hacker",
     description:
-      "Airdrop campaigns, quest platforms, KOL coordination, and viral loops engineered to move metrics, not just impressions.",
+      "Deploying aggressive, data backed tactics to scale visibility and user acquisition at maximum velocity.",
   },
   {
     icon: Bot,
     title: "Bot Setup",
     description:
-      "Custom Discord/Telegram bots — verification flows, raid tooling, analytics dashboards, and automated moderation.",
+      "Deploying custom automated infrastructure for 24/7 security, community moderation, and real time on chain alerts.",
   },
 ];
 
@@ -81,12 +81,12 @@ export default function MasterySection() {
           transition={{ duration: 0.5 }}
           className="mb-12 sm:mb-16"
         >
-          <p className="font-mono text-[10px] sm:text-xs text-t-muted uppercase tracking-[0.3em] mb-3">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl tracking-[0.15em] text-t-primary uppercase mb-3">
             What I Bring to the Table
-          </p>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl tracking-[0.15em] text-t-primary uppercase">
-            The Mastery Level
           </h2>
+          <p className="font-mono text-[10px] sm:text-xs text-t-muted uppercase tracking-[0.3em]">
+            My Mastery Level
+          </p>
           {/* Dashed underline separator (tobzyy-style) */}
           <div className="mt-4 border-t border-dashed border-jade/20 w-full max-w-xs" />
         </motion.div>

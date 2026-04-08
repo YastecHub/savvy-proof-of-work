@@ -182,7 +182,7 @@ export default function HeroSection() {
             className="flex items-center justify-center gap-2 px-7 py-3 border border-line text-t-muted font-mono text-xs uppercase tracking-wider rounded-lg hover:border-jade/20 hover:text-jade transition-all duration-300"
           >
             <ExternalLink size={14} />
-            Reach the King
+            Reach IM_SAVVY
           </a>
         </div>
 

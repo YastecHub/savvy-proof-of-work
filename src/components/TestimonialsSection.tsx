@@ -14,25 +14,25 @@ const row1: Screenshot[] = [
   {
     image: "/images/savvy1.jpg",
     caption:
-      "Live BuyBot tracking a $WTF Coin transaction — automated on-chain alerts powering the current project",
+      "Live BuyBot tracking a $WTF Coin transaction automated on-chain alerts powering the current project",
     source: "Telegram",
   },
   {
     image: "/images/savvy8.jpg",
     caption:
-      "$WTF inner circle — 535 members strong, building digital assets and scaling generational wealth",
+      "$WTF inner circle 535 members strong, building digital assets and scaling generational wealth",
     source: "Telegram",
   },
   {
     image: "/images/savvy3.jpg",
     caption:
-      "\"If anyone can deliver, it's you\" — client endorsing consistent delivery standards",
+      "\"If anyone can deliver, it's you\" client endorsing consistent delivery standards",
     source: "Telegram",
   },
   {
     image: "/images/savvy5.jpg",
     caption:
-      "\"Might just hire u for my other project\" — satisfaction leading to repeat business",
+      "\"Might just hire u for my other project\" satisfaction leading to repeat business",
     source: "X (Twitter)",
   },
 ];
@@ -41,7 +41,7 @@ const row2: Screenshot[] = [
   {
     image: "/images/savvy2.jpg",
     caption:
-      "Real-time $WTF transaction monitoring — community buybot deployment driving $300k+ ATH",
+      "Real-time $WTF transaction monitoring community buybot deployment driving $300k+ ATH",
     source: "Telegram",
   },
   {
@@ -53,13 +53,13 @@ const row2: Screenshot[] = [
   {
     image: "/images/savvy6.jpg",
     caption:
-      "\"You give good advice\" — advisory skills recognized by industry peer",
+      "\"You give good advice\" advisory skills recognized by industry peer",
     source: "X (Twitter)",
   },
   {
     image: "/images/savvy7.jpg",
     caption:
-      "\"Let's stay in touch\" — building long-term partnerships with satisfied clients",
+      "\"Let's stay in touch\" building long-term partnerships with satisfied clients",
     source: "Telegram",
   },
 ];

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -64,6 +65,88 @@ const row2: Screenshot[] = [
   },
 ];
 
+/* ── Draggable marquee wrapper ────────────────────────────── */
+const SWIPE_THRESHOLD = 50;
+
+function DraggableMarquee({
+  children,
+  animationClass,
+  className,
+}: {
+  children: React.ReactNode;
+  animationClass: string;
+  className?: string;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragState = useRef({ startX: 0, scrollLeft: 0, dragging: false });
+
+  const getClientX = (e: React.TouchEvent | React.MouseEvent) =>
+    "touches" in e ? e.touches[0].clientX : e.clientX;
+
+  const handleStart = useCallback(
+    (e: React.TouchEvent | React.MouseEvent) => {
+      const el = trackRef.current;
+      if (!el) return;
+      dragState.current = {
+        startX: getClientX(e),
+        scrollLeft: el.parentElement!.scrollLeft,
+        dragging: true,
+      };
+      setIsDragging(true);
+    },
+    [],
+  );
+
+  const handleMove = useCallback(
+    (e: React.TouchEvent | React.MouseEvent) => {
+      if (!dragState.current.dragging) return;
+      const parent = trackRef.current?.parentElement;
+      if (!parent) return;
+      const dx = getClientX(e) - dragState.current.startX;
+      if (Math.abs(dx) > 10) {
+        e.preventDefault();
+      }
+      parent.scrollLeft = dragState.current.scrollLeft - dx;
+    },
+    [],
+  );
+
+  const handleEnd = useCallback(() => {
+    dragState.current.dragging = false;
+    setIsDragging(false);
+  }, []);
+
+  return (
+    <div className={`marquee-wrapper ${className ?? ""}`}>
+      <div className="relative">
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 z-10 bg-gradient-to-r from-base to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 z-10 bg-gradient-to-l from-base to-transparent" />
+        <div
+          className="overflow-x-auto scrollbar-none"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          <div
+            ref={trackRef}
+            className={`flex w-max py-1 cursor-grab active:cursor-grabbing ${
+              isDragging ? "" : animationClass
+            }`}
+            onTouchStart={handleStart}
+            onTouchMove={handleMove}
+            onTouchEnd={handleEnd}
+            onMouseDown={handleStart}
+            onMouseMove={handleMove}
+            onMouseUp={handleEnd}
+            onMouseLeave={handleEnd}
+          >
+            {children}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Card component ───────────────────────────────────────── */
 function ScreenshotCard({ s, eager }: { s: Screenshot; eager?: boolean }) {
   return (
@@ -80,6 +163,7 @@ function ScreenshotCard({ s, eager }: { s: Screenshot; eager?: boolean }) {
           sizes="(max-width: 640px) 240px, 270px"
           loading={eager ? "eager" : "lazy"}
           priority={eager}
+          draggable={false}
         />
         {/* Subtle vignette */}
         <div className="absolute inset-0 z-[2] bg-gradient-to-t from-base/60 via-transparent to-base/20 pointer-events-none" />
@@ -130,31 +214,19 @@ export default function TestimonialsSection() {
         </motion.div>
       </div>
 
-      {/* Marquee row 1 — left scroll */}
-      <div className="marquee-wrapper mb-4 sm:mb-5">
-        <div className="relative">
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 z-10 bg-gradient-to-r from-base to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 z-10 bg-gradient-to-l from-base to-transparent" />
-          <div className="flex w-max animate-marquee py-1">
-            {doubled1.map((s, i) => (
-              <ScreenshotCard key={`r1-${i}`} s={s} eager={i < 4} />
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Marquee row 1 — left scroll, draggable */}
+      <DraggableMarquee animationClass="animate-marquee" className="mb-4 sm:mb-5">
+        {doubled1.map((s, i) => (
+          <ScreenshotCard key={`r1-${i}`} s={s} eager={i < 4} />
+        ))}
+      </DraggableMarquee>
 
-      {/* Marquee row 2 — right scroll */}
-      <div className="marquee-wrapper">
-        <div className="relative">
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 z-10 bg-gradient-to-r from-base to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 z-10 bg-gradient-to-l from-base to-transparent" />
-          <div className="flex w-max animate-marquee-reverse py-1">
-            {doubled2.map((s, i) => (
-              <ScreenshotCard key={`r2-${i}`} s={s} eager={i < 4} />
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Marquee row 2 — right scroll, draggable */}
+      <DraggableMarquee animationClass="animate-marquee-reverse">
+        {doubled2.map((s, i) => (
+          <ScreenshotCard key={`r2-${i}`} s={s} eager={i < 4} />
+        ))}
+      </DraggableMarquee>
     </section>
   );
 }

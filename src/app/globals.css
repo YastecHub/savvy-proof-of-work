@@ -112,6 +112,9 @@ body {
   animation-play-state: paused;
 }
 
+/* Hide scrollbar for drag-scrollable marquee */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
 /* ── CRT scanline (hero only) ─────────────────────── */
 .crt-overlay {
   position: absolute;

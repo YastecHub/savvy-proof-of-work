@@ -86,7 +86,7 @@ export default function ContactSection() {
               </p>
             </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-7">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-7" suppressHydrationWarning>
               {/* Name */}
               <motion.div variants={fadeUp} className="relative">
                 <label

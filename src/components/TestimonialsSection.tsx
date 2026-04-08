@@ -14,7 +14,13 @@ const row1: Screenshot[] = [
   {
     image: "/images/savvy1.jpg",
     caption:
-      "Live BuyBot tracking a WTF Coin transaction — automated on-chain alerts in action",
+      "Live BuyBot tracking a $WTF Coin transaction — automated on-chain alerts powering the current project",
+    source: "Telegram",
+  },
+  {
+    image: "/images/savvy8.jpg",
+    caption:
+      "$WTF inner circle — 535 members strong, building digital assets and scaling generational wealth",
     source: "Telegram",
   },
   {
@@ -29,19 +35,13 @@ const row1: Screenshot[] = [
       "\"Might just hire u for my other project\" — satisfaction leading to repeat business",
     source: "X (Twitter)",
   },
-  {
-    image: "/images/savvy7.jpg",
-    caption:
-      "\"Let's stay in touch\" — building long-term partnerships with satisfied clients",
-    source: "Telegram",
-  },
 ];
 
 const row2: Screenshot[] = [
   {
     image: "/images/savvy2.jpg",
     caption:
-      "Real-time transaction monitoring — community buybot deployment at scale",
+      "Real-time $WTF transaction monitoring — community buybot deployment driving $300k+ ATH",
     source: "Telegram",
   },
   {
@@ -55,6 +55,12 @@ const row2: Screenshot[] = [
     caption:
       "\"You give good advice\" — advisory skills recognized by industry peer",
     source: "X (Twitter)",
+  },
+  {
+    image: "/images/savvy7.jpg",
+    caption:
+      "\"Let's stay in touch\" — building long-term partnerships with satisfied clients",
+    source: "Telegram",
   },
 ];
 
@@ -144,7 +150,7 @@ export default function TestimonialsSection() {
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 z-10 bg-gradient-to-l from-base to-transparent" />
           <div className="flex w-max animate-marquee-reverse py-1">
             {doubled2.map((s, i) => (
-              <ScreenshotCard key={`r2-${i}`} s={s} eager={i < 3} />
+              <ScreenshotCard key={`r2-${i}`} s={s} eager={i < 4} />
             ))}
           </div>
         </div>

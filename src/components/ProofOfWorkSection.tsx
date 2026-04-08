@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Crown, Briefcase, type LucideIcon, Shield, Megaphone, Bot, Users, Rocket } from "lucide-react";
+import { Crown, Briefcase, type LucideIcon, Shield, Megaphone, Bot, Users, Rocket, TrendingUp, Target, Zap } from "lucide-react";
 
 /* ── Experience data ───────────────────────────────────────── */
 interface Experience {
@@ -106,6 +106,74 @@ export default function ProofOfWorkSection() {
             className="mt-4 h-[1px] w-full max-w-xs bg-gradient-to-r from-jade/50 to-transparent origin-left"
           />
         </motion.div>
+
+        {/* ── Currently Working On ─────────────────── */}
+        <motion.div
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-14 sm:mb-20"
+        >
+          <div className="relative rounded-xl border border-jade/25 bg-jade/[0.03] p-5 sm:p-7 overflow-hidden">
+            {/* Glow accent */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-jade/5 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Label */}
+            <div className="flex items-center gap-2.5 mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-jade opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-jade" />
+              </span>
+              <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-jade">
+                Currently Working On
+              </span>
+            </div>
+
+            {/* Project title */}
+            <h3 className="font-display text-lg sm:text-xl md:text-2xl tracking-wider text-t-primary mb-1">
+              WTF
+              <span className="ml-2 font-mono text-xs sm:text-sm text-t-muted/60">$WTF</span>
+            </h3>
+            <span className="inline-block font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-gold mb-4">
+              Project Advisor — Digital Marketing Asset
+            </span>
+
+            {/* Key points */}
+            <div className="space-y-3 mt-2">
+              <div className="flex items-start gap-2.5">
+                <Target size={13} className="text-jade/60 shrink-0 mt-[3px]" />
+                <p className="font-mono text-[11px] sm:text-xs text-t-muted leading-relaxed">
+                  <span className="text-t-primary/80 font-medium">Community Coordination:</span>{" "}
+                  Implementing strategic engagement frameworks to unify holder activity and maximize organic social reach.
+                </p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <TrendingUp size={13} className="text-jade/60 shrink-0 mt-[3px]" />
+                <p className="font-mono text-[11px] sm:text-xs text-t-muted leading-relaxed">
+                  <span className="text-t-primary/80 font-medium">Market Impact:</span>{" "}
+                  Successfully orchestrated community alignment, driving the project to a $300k+ ATH Market Cap within the first 5 days.
+                </p>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <Zap size={13} className="text-jade/60 shrink-0 mt-[3px]" />
+                <p className="font-mono text-[11px] sm:text-xs text-t-muted leading-relaxed">
+                  <span className="text-t-primary/80 font-medium">Current Focus:</span>{" "}
+                  Scaling outreach and sustaining high-velocity growth through tactical social positioning.
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Past Experience label ──────────────────── */}
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-line/50" />
+          <span className="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-t-muted/50">
+            Past Experience
+          </span>
+          <div className="h-px flex-1 bg-line/50" />
+        </div>
 
         {/* ── Timeline ────────────────────────────────── */}
         <motion.div

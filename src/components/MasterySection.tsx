@@ -64,8 +64,8 @@ const stagger = {
 };
 
 const fadeUp = {
-  hidden: { y: 24, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" as const } },
+  hidden: { y: 24 },
+  visible: { y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 /* ── Section ────────────────────────────────────────────────── */
@@ -75,8 +75,8 @@ export default function MasterySection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* ── Section header (tobzyy-style) ────────────── */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
           className="mb-12 sm:mb-16"

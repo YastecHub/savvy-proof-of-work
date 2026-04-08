@@ -138,8 +138,8 @@ export default function TestimonialsSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
           className="mb-12 sm:mb-16 text-center"
@@ -156,8 +156,8 @@ export default function TestimonialsSection() {
 
       {/* Marquee row 1 — left scroll */}
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        initial={{}}
+        whileInView={{}}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
         className="marquee-wrapper mb-4"
@@ -175,8 +175,8 @@ export default function TestimonialsSection() {
 
       {/* Marquee row 2 — right scroll */}
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        initial={{}}
+        whileInView={{}}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.15 }}
         className="marquee-wrapper"

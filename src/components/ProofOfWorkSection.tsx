@@ -77,13 +77,12 @@ const INITIAL = 6;
 
 /* ── Animation ──────────────────────────────────────────────── */
 const cardVariant = {
-  hidden: { y: 32, opacity: 0 },
+  hidden: { y: 32 },
   visible: (i: number) => ({
     y: 0,
-    opacity: 1,
     transition: { delay: i * 0.08, duration: 0.45, ease: "easeOut" as const },
   }),
-  exit: { y: -16, opacity: 0, transition: { duration: 0.2 } },
+  exit: { y: -16, transition: { duration: 0.2 } },
 };
 
 /* ── Section ────────────────────────────────────────────────── */
@@ -96,8 +95,8 @@ export default function ProofOfWorkSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* ── Header (tobzyy-style) ───────────────────── */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
           className="mb-12 sm:mb-16"
@@ -183,8 +182,8 @@ export default function ProofOfWorkSection() {
         {/* Load more */}
         {!showAll && allCards.length > INITIAL && (
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{}}
+            whileInView={{}}
             viewport={{ once: true }}
             className="flex justify-center mt-10"
           >

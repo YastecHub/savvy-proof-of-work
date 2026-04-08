@@ -6,8 +6,8 @@ import { Send, CheckCircle2 } from "lucide-react";
 
 /* ── Animation ──────────────────────────────────────────────── */
 const fadeUp = {
-  hidden: { y: 24, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" as const } },
+  hidden: { y: 24 },
+  visible: { y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 const stagger = {
@@ -48,8 +48,8 @@ export default function ContactSection() {
       <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
           className="mb-10 sm:mb-14 text-center"
@@ -161,8 +161,8 @@ export default function ContactSection() {
 
         {/* Social links */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.5 }}
           className="flex items-center justify-center gap-3 mt-8"

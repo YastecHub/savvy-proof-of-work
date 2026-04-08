@@ -49,7 +49,7 @@ const experiences: Experience[] = [
   },
   {
     company: "Trump Coin",
-    role: "Community Operations",
+    role: "Community Moderator",
     icon: Megaphone,
     description:
       "Optimized communication channels to handle rapid scaling and massive influxes of new members.",

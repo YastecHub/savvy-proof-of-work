@@ -9,7 +9,9 @@
       "WebFetch(domain:tobzyy-pow.vercel.app)",
       "WebFetch(domain:brittanychiang.com)",
       "WebFetch(domain:leerob.io)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{content_type} %{size_download}\" http://localhost:3333/api/og)",
+      "Bash(taskkill //f //im node.exe)"
     ]
   }
 }

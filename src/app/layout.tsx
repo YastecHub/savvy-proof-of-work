@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
+import { Analytics } from "@vercel/analytics/next";
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -69,6 +70,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <BackToTop />
+        <Analytics />
       </body>
     </html>
   );

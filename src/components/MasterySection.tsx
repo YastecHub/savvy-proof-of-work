@@ -23,37 +23,37 @@ const masteries: Mastery[] = [
     icon: Zap,
     title: "Engagement Strategy",
     description:
-      "Architecting community engagement funnels that convert lurkers into active participants and holders into evangelists.",
+      "Engineering high retention systems that convert casual observers into committed, long term community members.",
   },
   {
     icon: ShieldAlert,
     title: "Chaos Management",
     description:
-      "FUD storms, exploit panics, migration dramas — keeping communities stable when everything is on fire.",
+      "Maintaining operational stability during high volatility events, rapid launches, and unexpected crisis scenarios.",
   },
   {
     icon: Megaphone,
     title: "Brand Voice",
     description:
-      "Crafting the tone, language, and narrative identity that makes a project instantly recognizable on the timeline.",
+      "Defining a sharp, authentic narrative that resonates across social layers, from professional tech specs to viral culture.",
   },
   {
     icon: Lightbulb,
     title: "Project Advisor",
     description:
-      "Tokenomics review, launch sequencing, partnership strategy, and governance design from pre-seed to mainnet.",
+      "Providing strategic guidance on roadmaps and market positioning to bridge the gap between concept and launch.",
   },
   {
     icon: TrendingUp,
     title: "Growth Hacker",
     description:
-      "Airdrop campaigns, quest platforms, KOL coordination, and viral loops engineered to move metrics, not just impressions.",
+      "Deploying aggressive, data backed tactics to scale visibility and user acquisition at maximum velocity.",
   },
   {
     icon: Bot,
     title: "Bot Setup",
     description:
-      "Custom Discord/Telegram bots — verification flows, raid tooling, analytics dashboards, and automated moderation.",
+      "Deploying custom automated infrastructure for 24/7 security, community moderation, and real time on chain alerts.",
   },
 ];
 
@@ -64,8 +64,8 @@ const stagger = {
 };
 
 const fadeUp = {
-  hidden: { y: 24, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" as const } },
+  hidden: { y: 24 },
+  visible: { y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 /* ── Section ────────────────────────────────────────────────── */
@@ -75,18 +75,18 @@ export default function MasterySection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* ── Section header (tobzyy-style) ────────────── */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
           className="mb-12 sm:mb-16"
         >
-          <p className="font-mono text-[10px] sm:text-xs text-t-muted uppercase tracking-[0.3em] mb-3">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl tracking-[0.15em] text-t-primary uppercase mb-3">
             What I Bring to the Table
-          </p>
-          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl tracking-[0.15em] text-t-primary uppercase">
-            The Mastery Level
           </h2>
+          <p className="font-mono text-[10px] sm:text-xs text-t-muted uppercase tracking-[0.3em]">
+            My Mastery Level
+          </p>
           {/* Dashed underline separator (tobzyy-style) */}
           <div className="mt-4 border-t border-dashed border-jade/20 w-full max-w-xs" />
         </motion.div>
@@ -105,13 +105,13 @@ export default function MasterySection() {
               <motion.div
                 key={m.title}
                 variants={fadeUp}
-                className="group relative p-5 sm:p-6 rounded-xl border border-border bg-surface/40 hover:border-jade/15 hover:bg-elevated/40 transition-all duration-300 hover:-translate-y-1"
+                className="group relative p-5 sm:p-6 rounded-xl border border-line bg-surface/40 hover:border-jade/15 hover:bg-elevated/40 transition-all duration-300 hover:-translate-y-1"
               >
                 {/* Jade left ledger line */}
                 <div className="absolute left-0 top-4 bottom-4 w-[2px] rounded-full bg-jade/15 group-hover:bg-jade/40 transition-colors duration-300" />
 
                 {/* Icon */}
-                <div className="w-9 h-9 rounded-lg border border-border bg-elevated/60 flex items-center justify-center mb-4 group-hover:border-jade/25 transition-colors">
+                <div className="w-9 h-9 rounded-lg border border-line bg-elevated/60 flex items-center justify-center mb-4 group-hover:border-jade/25 transition-colors">
                   <Icon size={16} className="text-jade/60 group-hover:text-jade transition-colors" />
                 </div>
 

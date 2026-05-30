@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import { motion } from "framer-motion";
 import { Send, CheckCircle2 } from "lucide-react";
 
 /* ── Animation ──────────────────────────────────────────────── */
 const fadeUp = {
-  hidden: { y: 24, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" as const } },
+  hidden: { y: 24 },
+  visible: { y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
 const stagger = {
@@ -28,7 +28,7 @@ const socials = [
   },
   {
     label: "Telegram",
-    href: "#",
+    href: "https://t.me/IM_REBIRTH",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z" />
@@ -39,17 +39,7 @@ const socials = [
 
 /* ── Section ────────────────────────────────────────────────── */
 export default function ContactSection() {
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitted(true);
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setSubmitted(false);
-      (e.target as HTMLFormElement).reset();
-    }, 3000);
-  };
+  const [state, handleSubmit] = useForm("xykbobdq");
 
   return (
     <section id="contact" className="relative py-16 sm:py-24 md:py-32">
@@ -58,8 +48,8 @@ export default function ContactSection() {
       <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
           className="mb-10 sm:mb-14 text-center"
@@ -73,15 +63,15 @@ export default function ContactSection() {
           <div className="mt-4 mx-auto border-t border-dashed border-jade/20 w-24" />
         </motion.div>
 
-        {/* Form container with shimmer border */}
+        {/* Form container */}
         <motion.div
           variants={stagger}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="rounded-2xl border border-border bg-surface/40 p-6 sm:p-8"
+          className="rounded-2xl border border-line bg-surface/40 p-6 sm:p-8"
         >
-          {submitted ? (
+          {state.succeeded ? (
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -92,19 +82,13 @@ export default function ContactSection() {
                 Message Sent
               </h3>
               <p className="font-mono text-xs text-t-muted">
-                The King has received your scroll. Expect a raven.
+                IM_SAVVY has received your scroll. Expect a raven.
               </p>
             </motion.div>
           ) : (
-            <form 
-              onSubmit={handleSubmit}
-              action="https://formspree.io/f/xldrpvje" 
-              method="POST"
-              className="flex flex-col gap-7"
-              suppressHydrationWarning
-            >
+            <form onSubmit={handleSubmit} className="flex flex-col gap-7" suppressHydrationWarning>
               {/* Name */}
-              <motion.div variants={fadeUp} className="relative group">
+              <motion.div variants={fadeUp} className="relative">
                 <label
                   htmlFor="name"
                   className="block font-mono text-[10px] text-t-muted uppercase tracking-[0.2em] mb-2"
@@ -117,13 +101,13 @@ export default function ContactSection() {
                   type="text"
                   required
                   placeholder="ser anon"
-                  className="w-full bg-transparent border-b border-border pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
-                  suppressHydrationWarning
+                  className="w-full bg-transparent border-b border-line pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
                 />
+                <ValidationError prefix="Name" field="name" errors={state.errors} className="font-mono text-xs text-red-400 mt-1" />
               </motion.div>
 
               {/* Handle */}
-              <motion.div variants={fadeUp} className="relative group">
+              <motion.div variants={fadeUp} className="relative">
                 <label
                   htmlFor="handle"
                   className="block font-mono text-[10px] text-t-muted uppercase tracking-[0.2em] mb-2"
@@ -136,13 +120,13 @@ export default function ContactSection() {
                   type="text"
                   required
                   placeholder="@yourhandle"
-                  className="w-full bg-transparent border-b border-border pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
-                  suppressHydrationWarning
+                  className="w-full bg-transparent border-b border-line pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
                 />
+                <ValidationError prefix="Handle" field="handle" errors={state.errors} className="font-mono text-xs text-red-400 mt-1" />
               </motion.div>
 
               {/* Message */}
-              <motion.div variants={fadeUp} className="relative group">
+              <motion.div variants={fadeUp} className="relative">
                 <label
                   htmlFor="message"
                   className="block font-mono text-[10px] text-t-muted uppercase tracking-[0.2em] mb-2"
@@ -155,19 +139,20 @@ export default function ContactSection() {
                   required
                   rows={4}
                   placeholder="What brings you to the court?"
-                  className="w-full bg-transparent border-b border-border pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none resize-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
-                  suppressHydrationWarning
+                  className="w-full bg-transparent border-b border-line pb-3 font-mono text-sm text-t-primary placeholder:text-t-muted/30 outline-none resize-none transition-all duration-300 focus:border-jade focus:shadow-[0_2px_12px_-4px_rgba(74,222,110,0.2)]"
                 />
+                <ValidationError prefix="Message" field="message" errors={state.errors} className="font-mono text-xs text-red-400 mt-1" />
               </motion.div>
 
               {/* Submit */}
               <motion.div variants={fadeUp}>
                 <button
                   type="submit"
-                  className="group w-full flex items-center justify-center gap-2 py-3.5 bg-jade/10 border border-jade/25 text-jade font-mono text-xs uppercase tracking-wider rounded-lg transition-all duration-300 hover:bg-jade/15 hover:border-jade/40 hover:shadow-jade"
+                  disabled={state.submitting}
+                  className="group w-full flex items-center justify-center gap-2 py-3.5 bg-jade/10 border border-jade/25 text-jade font-mono text-xs uppercase tracking-wider rounded-lg transition-all duration-300 hover:bg-jade/15 hover:border-jade/40 hover:shadow-jade disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send size={14} />
-                  Send Message
+                  {state.submitting ? "Sending..." : "Send Message"}
                 </button>
               </motion.div>
             </form>
@@ -176,8 +161,8 @@ export default function ContactSection() {
 
         {/* Social links */}
         <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.5 }}
           className="flex items-center justify-center gap-3 mt-8"
@@ -189,7 +174,7 @@ export default function ContactSection() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.label}
-              className="w-10 h-10 rounded-full border border-border bg-surface/60 flex items-center justify-center text-t-muted hover:text-jade hover:border-jade/30 hover:shadow-jade transition-all duration-300"
+              className="w-10 h-10 rounded-full border border-line bg-surface/60 flex items-center justify-center text-t-muted hover:text-jade hover:border-jade/30 hover:shadow-jade transition-all duration-300"
             >
               {s.icon}
             </a>

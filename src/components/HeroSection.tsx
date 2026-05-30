@@ -1,28 +1,16 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowDown, Shield, ExternalLink } from "lucide-react";
 
-/* ── Stagger container ──────────────────────────────────────── */
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-};
 
-const fadeUp = {
-  hidden: { y: 28, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
-};
-
-const scaleIn = {
-  hidden: { scale: 0.7, opacity: 0 },
-  visible: { scale: 1, opacity: 1, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
-};
-
-/* ── Meteor component ───────────────────────────────────────── */
+/* ── Meteor component (client-only to avoid hydration mismatch) */
 function Meteors({ count = 12 }: { count?: number }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const meteors = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
@@ -32,11 +20,14 @@ function Meteors({ count = 12 }: { count?: number }) {
         duration: `${3 + Math.random() * 4}s`,
         size: Math.random() * 1.5 + 0.5,
       })),
-    [count]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [count, mounted]
   );
 
+  if (!mounted) return null;
+
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" suppressHydrationWarning>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {meteors.map((m) => (
         <div
           key={m.id}
@@ -47,12 +38,10 @@ function Meteors({ count = 12 }: { count?: number }) {
             animationDelay: m.delay,
             animationDuration: m.duration,
           }}
-          suppressHydrationWarning
         >
           <div
             className="rounded-full bg-jade/30"
             style={{ width: `${m.size}px`, height: `${m.size * 60}px` }}
-            suppressHydrationWarning
           />
         </div>
       ))}
@@ -73,14 +62,15 @@ export default function HeroSection() {
       <div className="crt-overlay" />
 
       {/* Content */}
-      <motion.div
-        variants={stagger}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-5 sm:gap-6 py-20 sm:py-24 opacity-100"
+      <div
+        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-5 sm:gap-6 py-20 sm:py-24"
       >
         {/* Badge */}
-        <motion.div variants={fadeUp}>
+        <motion.div
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.1, duration: 0.6 }}
+        >
           <span className="inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 rounded-full border border-jade/15 bg-jade/5 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-jade/70">
             <span className="w-1.5 h-1.5 rounded-full bg-jade animate-pulse-jade" />
             Project operations and community architect
@@ -88,7 +78,11 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Hex avatar */}
-        <motion.div variants={scaleIn} className="relative mt-2">
+        <motion.div
+          initial={{ scale: 0.85 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.7 }}
+          className="relative mt-2">
           {/* Outer rotating dashed ring */}
           <div className="absolute inset-[-16px] rounded-full border border-dashed border-jade-glow/40 animate-rotate-slow" />
 
@@ -114,7 +108,9 @@ export default function HeroSection() {
 
         {/* Heading */}
         <motion.h1
-          variants={fadeUp}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
           className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-wide leading-none"
         >
           <span className="bg-gradient-to-r from-jade via-emerald-300 to-jade bg-clip-text text-transparent">
@@ -123,23 +119,18 @@ export default function HeroSection() {
         </motion.h1>
 
         {/* Subheading block */}
-        <motion.div
-          variants={fadeUp}
-          className="mt-8 w-full max-w-2xl"
-        >
+        <div className="mt-8 w-full max-w-2xl">
+
           {/* Title line */}
-          <motion.div
-            variants={fadeUp}
+          <div
             className="font-mono text-xs sm:text-sm italic text-t-muted text-center mb-8"
             style={{ fontVariant: "small-caps", letterSpacing: "0.1em" }}
           >
             I build operations & community architecture.
-          </motion.div>
+          </div>
 
           {/* Transformation stack */}
-          <motion.div
-            className="space-y-6 mb-6"
-          >
+          <div className="space-y-6 mb-6">
             {[
               { left: "chaos", right: "clarity" },
               { left: "vision", right: "reality" },
@@ -148,8 +139,8 @@ export default function HeroSection() {
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ y: 10 }}
+                animate={{ y: 0 }}
                 transition={{ delay: 0.2 * (idx + 1), duration: 0.6 }}
                 className="flex items-center justify-center gap-4 text-sm sm:text-base"
               >
@@ -158,34 +149,26 @@ export default function HeroSection() {
                 <span className="font-display text-t-primary text-sm sm:text-lg">{item.right}</span>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
 
           {/* Final blockquote line */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="font-mono text-xs text-t-muted pl-3 border-l-2 border-jade text-center md:text-left"
-          >
-            I don't just manage groups. I build the engine that runs them.
-          </motion.div>
-        </motion.div>
+          <div className="font-mono text-xs text-t-muted pl-3 border-l-2 border-jade text-center md:text-left">
+            I don&apos;t just manage groups. I build the engine that runs them.
+          </div>
+        </div>
 
         {/* Gradient line separator */}
-        <motion.div
-          variants={fadeUp}
+        <div
           className="h-px w-2/5 mx-auto"
           style={{
-            background: "linear-gradient(to right, transparent, var(--accent-primary), transparent)",
+            background: "linear-gradient(to right, transparent, #4ade6e, transparent)",
             margin: "32px 0",
           }}
         />
 
         {/* CTAs */}
-        <motion.div
-          variants={fadeUp}
-          className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto mt-3"
-        >
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto mt-3">
+
           <a
             href="#proof-of-work"
             className="group relative flex items-center justify-center gap-2 px-7 py-3 bg-jade/10 border border-jade/25 text-jade font-mono text-xs uppercase tracking-wider rounded-lg overflow-hidden transition-all duration-300 hover:bg-jade/15 hover:border-jade/40 hover:shadow-jade"
@@ -196,23 +179,23 @@ export default function HeroSection() {
           </a>
           <a
             href="#contact"
-            className="flex items-center justify-center gap-2 px-7 py-3 border border-border text-t-muted font-mono text-xs uppercase tracking-wider rounded-lg hover:border-jade/20 hover:text-jade transition-all duration-300"
+            className="flex items-center justify-center gap-2 px-7 py-3 border border-line text-t-muted font-mono text-xs uppercase tracking-wider rounded-lg hover:border-jade/20 hover:text-jade transition-all duration-300"
           >
             <ExternalLink size={14} />
-            Reach the King
+            Reach IM_SAVVY
           </a>
-        </motion.div>
+        </div>
 
         {/* Scroll indicator */}
-        <motion.div variants={fadeUp} className="mt-8 sm:mt-12">
+        <div className="mt-8 sm:mt-12">
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" as const }}
           >
             <ArrowDown size={18} className="text-t-muted/40" />
           </motion.div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

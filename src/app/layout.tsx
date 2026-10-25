@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     title: "IM_SAVVY — Web3 Operator & Community Architect",
     description: "I build operations & community architecture. Proof of work, real receipts, and results that speak.",
     images: ["/api/og"],
+    creator: "@savvys4th",
   },
   metadataBase: new URL("https://savvychad.com"),
 };

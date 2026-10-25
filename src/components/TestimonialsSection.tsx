@@ -66,8 +66,6 @@ const row2: Screenshot[] = [
 ];
 
 /* ── Draggable marquee wrapper ────────────────────────────── */
-const SWIPE_THRESHOLD = 50;
-
 function DraggableMarquee({
   children,
   animationClass,

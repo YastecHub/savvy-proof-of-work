@@ -60,8 +60,10 @@ export async function GET() {
           }}
         >
           {/* Avatar */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={avatarBase64}
+            alt="IM_SAVVY"
             width={160}
             height={160}
             style={{

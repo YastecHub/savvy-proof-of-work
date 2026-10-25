@@ -64,6 +64,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={`${cinzel.variable} ${ibmPlexMono.variable} antialiased bg-base text-t-primary font-mono`}
+        suppressHydrationWarning
       >
         <ScrollProgress />
         <CustomCursor />
